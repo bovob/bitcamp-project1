@@ -5,10 +5,10 @@ package bitcamp.project1;
 
 public class App2 {
   String line = "----------------------------------";
-  String[] mainMenus = new String[] {"예산", "지출", "월 결산", "고정비", "목표 설정", "종료"};
+  String[] mainMenus = new String[] {"예산", "지출", "월 결산", "고정비", "목표", "종료"};
   String[][] subMenus =
       {{"등록", "목록", "조회", "변경", "삭제", "이전"}, {"등록", "목록", "조회", "변경", "삭제", "이전"}, {},
-          {"등록", "목록", "조회", "변경", "삭제", "이전"}, {"등록", "목록", "조회", "변경", "삭제", "이전"}};
+          {"등록", "목록", "조회", "변경", "삭제", "이전"}, {"등록", "조회", "변경", "이전"}};
 
   //  UserCommand userCommand = new UserCommand();
   //  BoardCommand boardCommand = new BoardCommand();
@@ -92,7 +92,7 @@ public class App2 {
             case "고정비":
               System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
-            case "목표설정":
+            case "목표":
               System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               ;
               break;
