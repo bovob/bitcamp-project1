@@ -22,15 +22,15 @@ public class Test1 {
   static void m2() {
     System.out.println("M2");
     for(int i=0; i<10; i++) {
-        System.out.println("i");
+        System.out.println("i");}
     }
-  }
 
-    static void m3() {
+static void m3() {
         System.out.println("M3");
     }
 
-  static void m9() {
+    static void m9() {
       System.out.println("M9");
   }
 }
+
