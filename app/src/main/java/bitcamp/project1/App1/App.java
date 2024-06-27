@@ -1,16 +1,18 @@
 package bitcamp.project1.App1;
 
+import bitcamp.project1.App1.command.BudgetCommand;
 import bitcamp.project1.App1.util.Prompt;
+import bitcamp.project1.App1.vo.Budget;
 
 public class App {
 
     static String[] mainMenus = new String[] { "예산", "지출", "월 결산", "고정비", "목표 설정","종료" };
     static String[][] subMenus = {
-        {"예산메뉴", "예산메뉴"},
-        {"지출메뉴", "지출메뉴"},
-        {"월 결산 메뉴", "월 결산 메뉴"},
-        {"고정비", "고정비"},
-        {"목표 설정", "목표 설정"}
+        { "등록", "목록", "조회", "변경", "삭제" },
+        { "등록", "목록", "조회", "변경", "삭제" },
+        { "등록", "목록", "조회", "변경", "삭제" },
+        { "등록", "목록", "조회", "변경", "삭제" },
+        { "등록", "목록", "조회", "변경", "삭제" }
     };
 
 
@@ -94,6 +96,7 @@ public class App {
                     switch (menuTitle) {
                         case "예산":
                             System.out.println("예산");
+                            BudgetCommand.executeBudgetCommand(subMenuTitle);
                             break;
                         case "지출":
                             System.out.println("지출");
