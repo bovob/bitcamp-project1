@@ -1,23 +1,30 @@
 package bitcamp.project1.App1;
 
 import bitcamp.project1.App1.command.BudgetCommand;
+import bitcamp.project1.App1.command.FixedcostCommand;
 import bitcamp.project1.App1.util.Prompt;
 import bitcamp.project1.App1.vo.Budget;
+import bitcamp.project1.App1.vo.Fixedcost;
 
 public class App {
 
-    static String[] mainMenus = new String[] { "예산", "지출", "월 결산", "고정비", "목표 설정","종료" };
+    static String[] mainMenus = new String[] { "예산", "지출", "월 결산", "고정비", "목표","종료" };
     static String[][] subMenus = {
         { "등록", "목록", "조회", "변경", "삭제" },
         { "등록", "목록", "조회", "변경", "삭제" },
-        { "등록", "목록", "조회", "변경", "삭제" },
+        { }, // 월 결산은 리스트만
         { "등록", "목록", "조회", "변경", "삭제" },
         { "등록", "목록", "조회", "변경", "삭제" }
     };
 
+    BudgetCommand budgetCommand = new BudgetCommand();
+    FixedcostCommand fixedcostCommand = new FixedcostCommand();
 
     public static void main(String[] args) {
+        new App().execute();
+    }
 
+    void execute() {
         printMenu();
 
         String command;
@@ -76,7 +83,7 @@ public class App {
         System.out.println(boldAnsi + line + resetAnsi);
     }
 
-    static void processMenu(String menuTitle, String[] menus) {
+    void processMenu(String menuTitle, String[] menus) {
         printSubMenu(menuTitle, menus);
         while (true) {
             String command = Prompt.input(String.format("메인/%s>", menuTitle));
@@ -96,7 +103,7 @@ public class App {
                     switch (menuTitle) {
                         case "예산":
                             System.out.println("예산");
-                            BudgetCommand.executeBudgetCommand(subMenuTitle);
+                            budgetCommand.executeBudgetCommand(subMenuTitle);
                             break;
                         case "지출":
                             System.out.println("지출");
@@ -106,6 +113,7 @@ public class App {
                             break;
                         case "고정비":
                             System.out.println("고정비");
+                            fixedcostCommand.executeFixedcostCommand(subMenuTitle);
                             break;
                         case "목표 설정":
                             System.out.println("목표 설정");

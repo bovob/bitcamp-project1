@@ -34,6 +34,7 @@ java {
 
 application {
     // Define the main class for the application.
+//    mainClass = 'bitcamp.project1.App2'
     mainClass = 'bitcamp.project1.App1.App'
 }
 

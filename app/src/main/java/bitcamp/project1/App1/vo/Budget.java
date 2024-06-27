@@ -1,10 +1,11 @@
 package bitcamp.project1.App1.vo;
 
+import java.util.Objects;
+
 public class Budget {
 
     // 인덱스
     private static int seqNo;
-
     // 번호
     private int no;
     // 예산 이름
@@ -13,6 +14,39 @@ public class Budget {
     private int money;
     // 금액 전체
     private int sumMoney;
+
+    public int getSumMoney() {
+        return sumMoney;
+    }
+
+    public void setSumMoney(int sumMoney) {
+        this.sumMoney = sumMoney;
+    }
+
+    // 기본연산자
+    public Budget(){}
+
+    // 예산번호 받을 연산자
+    public Budget(int no){
+        this.no = no;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Budget budget = (Budget) o;
+        return no == budget.no;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(no);
+    }
 
     public static int getSeqNo() {
         return seqNo;
@@ -44,14 +78,6 @@ public class Budget {
 
     public void setMoney(int money) {
         this.money = money;
-    }
-
-    public int getSumMoney() {
-        return sumMoney;
-    }
-
-    public void setSumMoney(int sumMoney) {
-        this.sumMoney = sumMoney;
     }
 
     // 인덱스 추가
