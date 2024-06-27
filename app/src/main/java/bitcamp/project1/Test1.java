@@ -27,7 +27,14 @@ public class Test1 {
   }
 
     static void m3() {
-        System.out.println("M3");
+      String[] arr = new String[]{"a","b","c"};
+
+      System.out.println("M3");
+      for(int i=0; i<arr.length ; i++){
+          System.out.println(arr[i]);
+      }
+        System.out.println("END");
+
     }
 
   static void m9() {
