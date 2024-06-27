@@ -24,7 +24,7 @@ public class Test1 {
     for(int i=0; i<10; i++) {
         System.out.println("i");}
     }
-  }
+
 
     static void m3() {
       String[] arr = new String[]{"a","b","c"};
