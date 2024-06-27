@@ -23,6 +23,8 @@ public class App2 {
     String boldAnsi = "\033[1m";
     String redAnsi = "\033[31m";
     String resetAnsi = "\033[0m";
+    System.out.print(
+        "\n" + "    _        _     _    _  _____  _      _____  _____ ___  ___ _____     _        _    \n" + " /\\| |/\\  /\\| |/\\ | |  | ||  ___|| |    /  __ \\|  _  ||  \\/  ||  ___| /\\| |/\\  /\\| |/\\ \n" + " \\ ` ' /  \\ ` ' / | |  | || |__  | |    | /  \\/| | | || .  . || |__   \\ ` ' /  \\ ` ' / \n" + "|_     _||_     _|| |/\\| ||  __| | |    | |    | | | || |\\/| ||  __| |_     _||_     _|\n" + " / , . \\  / , . \\ \\  /\\  /| |___ | |____| \\__/\\\\ \\_/ /| |  | || |___  / , . \\  / , . \\ \n" + " \\/|_|\\/  \\/|_|\\/  \\/  \\/ \\____/ \\_____/ \\____/ \\___/ \\_|  |_/\\____/  \\/|_|\\/  \\/|_|\\/ \n" + "                                                                                       \n" + "                                                                                       \n");
     String appTitle = "[가계부]";
     System.out.println(boldAnsi + line + resetAnsi);
     System.out.println(boldAnsi + appTitle + resetAnsi);
@@ -82,16 +84,16 @@ public class App2 {
         } else {
           switch (menuTitle) {
             case "예산":
-              System.out.printf("여기는 앞으로 %s", subMenuTitle);
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
             case "지출":
-              System.out.printf("여기는 앞으로 %s", subMenuTitle);
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
             case "고정비":
-              System.out.printf("여기는 앞으로 %s", subMenuTitle);
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
             case "목표설정":
-              System.out.printf("여기는 앞으로 %s", subMenuTitle);
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               ;
               break;
             default:
