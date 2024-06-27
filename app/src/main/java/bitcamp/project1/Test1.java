@@ -7,9 +7,11 @@ public class Test1 {
   }
 
   public static void main(String[] args) {
+    System.out.println("Hello World");
+  }
 
-    Test1 t = new Test1();
-
+  static void m1(){
+    System.out.println("오호라!");
   }
 
 }
