@@ -8,6 +8,11 @@ public class Test1 {
 
   public static void main(String[] args) {
     System.out.println("Hello World");
+    System.out.println("Hello World");
+    System.out.println("Hello World");
+    System.out.println("Hello World....!");
+
+
   }
 
   static void m1(){
@@ -16,6 +21,10 @@ public class Test1 {
 
   static void m2() {
     System.out.println("M2");
+  }
+
+  static void m3() {
+    System.out.println("M3");
   }
 
 }
