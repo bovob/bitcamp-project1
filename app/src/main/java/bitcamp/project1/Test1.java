@@ -9,6 +9,10 @@ public class Test1 {
   public static void main(String[] args) {
     System.out.println("Hello World123");
     System.out.println("OKOK");
+    System.out.println("Hello World");
+    System.out.println("Hello World");
+    System.out.println("Hello World");
+    System.out.println("Hello World....!");
   }
 
   static void m1(){
@@ -19,8 +23,11 @@ public class Test1 {
     System.out.println("M2");
   }
 
-  static void m9(){
-    System.out.println("M9");
-  }
+    static void m3() {
+        System.out.println("M3");
+    }
 
+  static void m9() {
+      System.out.println("M9");
+  }
 }
