@@ -7,15 +7,20 @@ public class Test1 {
   }
 
   public static void main(String[] args) {
-    System.out.println("Hello World");
+    System.out.println("Hello World123");
+    System.out.println("OKOK");
   }
 
   static void m1(){
-    System.out.println("오호라!");
+    System.out.println("M1");
   }
 
   static void m2() {
     System.out.println("M2");
+  }
+
+  static void m9(){
+    System.out.println("M9");
   }
 
 }
