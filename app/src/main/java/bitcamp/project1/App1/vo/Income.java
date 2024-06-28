@@ -1,6 +1,8 @@
 package bitcamp.project1.App1.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Objects;
+import java.util.Date;
 
 public class Income {
 
@@ -12,9 +14,13 @@ public class Income {
     private String Name;
     // 금액
     private int money;
+    // 날짜
+    private Date date;
 
     // 기본연산자
     public Income(){}
+
+
 
     // 수입번호 받을 연산자
     public Income(int no){
@@ -68,6 +74,16 @@ public class Income {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(this.date);
+    }
+
+    public void setDate(Date date) {
+
+        this.date = date;
     }
 
     // 인덱스 추가

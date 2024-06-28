@@ -1,8 +1,11 @@
 package bitcamp.project1.App1;
 
+import bitcamp.project1.App1.command.ExpendCommand;
 import bitcamp.project1.App1.command.IncomeCommand;
 import bitcamp.project1.App1.command.FixedcostCommand;
+import bitcamp.project1.App1.command.MonthlyCommand;
 import bitcamp.project1.App1.util.Prompt;
+
 
 public class App {
 
@@ -17,6 +20,8 @@ public class App {
 
     IncomeCommand incomeCommand = new IncomeCommand();
     FixedcostCommand fixedcostCommand = new FixedcostCommand();
+    ExpendCommand expendCommand = new ExpendCommand();
+    MonthlyCommand monthlyCommand = new MonthlyCommand();
 
     public static void main(String[] args) {
         new App().execute();
@@ -42,7 +47,7 @@ public class App {
                     } else if (menuTitle.equals("종료")) {
                         break;
                     } else {
-                        if (menuNo >= 1 && menuNo <= 3) {
+                        if (menuNo >= 1 && menuNo <= mainMenus.length) {
                             processMenu(menuTitle, subMenus[menuNo - 1]);
                         } else {
                             System.out.println(menuTitle);
@@ -105,9 +110,11 @@ public class App {
                             break;
                         case "지출":
                             System.out.println("지출");
+                            expendCommand.executeExpendCommand(subMenuTitle);
                             break;
                         case "월 결산":
                             System.out.println("월 결산");
+                            monthlyCommand.executeMonthlyCommand(subMenuTitle);
                             break;
                         case "고정비":
                             System.out.println("고정비");
