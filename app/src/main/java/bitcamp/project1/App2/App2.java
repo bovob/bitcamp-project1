@@ -3,21 +3,29 @@
  */
 package bitcamp.project1.App2;
 
-public class App2 {
-  static String appTitle = "[가계부]";
-  Css css = new Css();
-  String[] mainMenus = new String[] {"예산", "지출", "월 결산", "고정비", "목표", "종료"};
-  String[][] subMenus =
-      {{"등록", "목록", "조회", "변경", "삭제", "이전"}, {"등록", "목록", "조회", "변경", "삭제", "이전"}, {},
-          {"등록", "목록", "조회", "변경", "삭제", "이전"}, {"등록", "조회", "변경", "이전"}};
+import bitcamp.project1.App2.command.OutcomeCommand;
+import bitcamp.project1.App2.util.Prompt;
+import bitcamp.project1.App2.vo.Css;
 
-  //  UserCommand userCommand = new UserCommand();
-  //  BoardCommand boardCommand = new BoardCommand();
+public class App2 {
+  private static String appTitle = "[가계부]";
+  Css css = new Css();
+  String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월 결산", "종료"};
+  String[][] subMenus =
+      {{"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "이전"},
+          {"등록", "목록", "조회", "변경", "삭제", "이전"}, {}};
+
+  //  IncomeCommand uCommand = new UserCommand();
+  OutcomeCommand outcomeCommand = new OutcomeCommand();
   //  BoardCommand noticeCommand = new BoardCommand();
   //  ProjectCommand projectCommand = new ProjectCommand(userCommand.getUserList());
 
   public static void main(String[] args) {
     new App2().execute();
+  }
+
+  public static String getAppTitle() {
+    return appTitle;
   }
 
   void printmenu() {
@@ -75,18 +83,17 @@ public class App2 {
           System.out.println("유효한 메뉴 번호가 아닙니다.");
         } else {
           switch (menuTitle) {
-            case "예산":
-              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
+            case "수입":
+              outcomeCommand.executeOutcomeCommand(subMenuTitle);
               break;
             case "지출":
               System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
-            case "고정비":
-              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
-              break;
             case "목표":
               System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
-              ;
+              break;
+            case "고정비":
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
             default:
               System.out.printf("%s 메뉴의 명령을 처리할 수 없습니다.\n", menuTitle);

@@ -1,13 +1,15 @@
-package bitcamp.project1.App2;
+package bitcamp.project1.App2.vo;
 
+
+import bitcamp.project1.App2.App2;
 
 public class Css {
-  String boldAnsi = "\033[1m";
-  String redAnsi = "\033[31m";
-  String resetAnsi = "\033[0m";
-  String yellowAnsi = "\033[93m";
-  String blueAnsi = "\033[94m";
-  String blueBackAnsi = "\033[44m";
+  public String boldAnsi = "\033[1m";
+  public String redAnsi = "\033[31m";
+  public String resetAnsi = "\033[0m";
+  public String yellowAnsi = "\033[93m";
+  public String blueAnsi = "\033[94m";
+  public String blueBackAnsi = "\033[44m";
 
 
   public void titlePrint() {
@@ -18,7 +20,7 @@ public class Css {
     System.out.print(resetAnsi);
     lineFlowery();
     isSpace();
-    System.out.println(boldAnsi + App2.appTitle + resetAnsi);
+    System.out.println(boldAnsi + App2.getAppTitle() + resetAnsi);
   }
 
   public void lineFlowery() {
