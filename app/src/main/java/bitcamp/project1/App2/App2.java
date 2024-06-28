@@ -84,10 +84,10 @@ public class App2 {
         } else {
           switch (menuTitle) {
             case "수입":
-              outcomeCommand.executeOutcomeCommand(subMenuTitle);
+              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
               break;
             case "지출":
-              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
+              outcomeCommand.executeOutcomeCommand(subMenuTitle);
               break;
             case "목표":
               System.out.printf("여기는 앞으로 %s\n", subMenuTitle);

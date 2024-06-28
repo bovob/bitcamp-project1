@@ -43,19 +43,19 @@ public class OutcomeCommand {
   //    System.out.printf("조회수: %d\n", board.getViewCount());
   //  }
   //
-  //  private void updateOutcome() {
-  //    int boardNo = Prompt.inputInt("게시글 번호?");
-  //    Outcome board = (Outcome) boardList.get(boardList.indexOf(new Outcome(boardNo)));
-  //    if (board == null) {
-  //      System.out.println("없는 게시글 입니다.");
-  //      return;
-  //    }
-  //    board.setView();
-  //    board.setTitle((Prompt.input("프로젝트명(%s): \n", board.getTitle())));
-  //    board.setContent((Prompt.input("설명(%s): \n", board.getContent())));
-  //    System.out.println("변경됨");
-  //  }
-  //
+  private void updateOutcome() {
+    int outcomNo = Prompt.inputInt("게시글 번호?");
+    Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
+    if (outcome == null) {
+      System.out.println("없는 게시글 입니다.");
+      return;
+    }
+    outcome.setView();
+    outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
+    outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
+    System.out.println("변경됨");
+  }
+
   //  private void deleteOutcome() {
   //    int boardNo = Prompt.inputInt("프로젝트 번호?");
   //    Outcome deletedBoard = (Outcome) boardList.get(boardList.indexOf(new Outcome(boardNo)));
@@ -69,11 +69,10 @@ public class OutcomeCommand {
 
   private void addOutcome() {
     Outcome outcome = new Outcome();
-    int no = Outcome.getSeqNo();
-    outcome.setNo(no);
+    outcome.setNo(Outcome.getSeqNo());
     outcome.setAmount(Prompt.inputInt("쓴 돈: "));
     outcome.setDate(Prompt.inputDate("날짜 (yyyy-MM-dd): "));
-    //    outcome.setNo(Outcome.getSeqNo());
+    outcome.setMemo(Prompt.input("메모:"));
     outcomeList.add(outcome);
     System.out.println("등록했습니다.");
   }
@@ -82,7 +81,8 @@ public class OutcomeCommand {
     System.out.println("번호 날짜 금액");
     for (Object obj : outcomeList.toArray()) {
       Outcome outcome = (Outcome) obj;
-      System.out.printf("%d %tB %.2f\n", outcome.getNo(), outcome.getDate(), outcome.getAmount());
+      System.out.printf("%d %tB/%td일 -%d원\n", outcome.getNo(), outcome.getDate(), outcome.getDate(),
+          outcome.getAmount());
     }
   }
 

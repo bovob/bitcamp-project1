@@ -7,12 +7,12 @@ public class Outcome {
   int no;
   String memo;
   Date date;
-  double amount;
+  int amount;
 
   public Outcome() {
   }
 
-  public Outcome(int no, String memo, Date date, double amount) {
+  public Outcome(int no, String memo, Date date, int amount) {
     this.no = no;
     this.memo = memo;
     this.date = date;
@@ -23,11 +23,11 @@ public class Outcome {
     return ++seqNo;
   }
 
-  public double getAmount() {
+  public int getAmount() {
     return amount;
   }
 
-  public void setAmount(double amount) {
+  public void setAmount(int amount) {
     this.amount = amount;
   }
 
