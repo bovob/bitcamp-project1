@@ -13,7 +13,7 @@ public class IncomeCommand {
     LinkedList incomeList = new LinkedList();
 
     // 수입 메뉴목록
-    public void executeBudgetCommand(String command) {
+    public void executeIncomeCommand(String command) {
         System.out.printf("[%s]\n", command);
         switch (command) {
             case "등록":
@@ -114,7 +114,7 @@ public class IncomeCommand {
             }
             return filteredIncomes.toArray();
         }
-    }
+    
     
     // 정렬 출력
     private void sortAndPrintIncomes(Object[] incomes, String sortOption) {
