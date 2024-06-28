@@ -33,9 +33,9 @@ public class BudgetCommand {
         Budget budget = new Budget();
         budget.setName(Prompt.input("예산이름?"));
         budget.setMoney(Prompt.inputInt("금액?"));
-        System.out.println("총 합계?");
         budget.setNo(Budget.getNextSeqNo());
         budgetList.add(budget);
+        System.out.printf("총 합계? %d\n",budgetList.sumValue());
     }
 
     private void viewBudget() {
@@ -48,15 +48,14 @@ public class BudgetCommand {
         System.out.printf("예산번호: %d\n", budgetNo);
         System.out.printf("예산명: %s\n", budget.getName());
         System.out.printf("금액: %s\n", budget.getMoney());
-        System.out.printf("총 금액: %s\n", "현재 총 금액을 보여줄 예정입니다.");
+        System.out.printf("총 금액: %d\n", budgetList.sumValue());
     }
 
     private void listBudget() {
         System.out.println("예산번호 이름 금액 합계");
         for (Object obj : budgetList.toArray()) {
             Budget budget = (Budget) obj;
-            // 마지막 합계 %s -> %d로 바꿔야함
-            System.out.printf("%d %s %d %s\n", budget.getNo(), budget.getName(), budget.getMoney(),"합계나올자리");
+            System.out.printf("%d %s %d %d\n", budget.getNo(), budget.getName(), budget.getMoney(),budgetList.sumValue());
         }
     }
 
@@ -70,7 +69,7 @@ public class BudgetCommand {
 
         budget.setName(Prompt.input("예산이름(현재 : %s)?", budget.getName()));
         budget.setMoney(Prompt.inputInt("예산(현재 : %d)?", budget.getMoney()));
-        System.out.println("총 예산이 나올자리 입니다.");
+        System.out.printf("총 합계? %d\n",budgetList.sumValue());
         System.out.println("변경 했습니다.");
     }
 

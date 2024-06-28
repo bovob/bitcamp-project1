@@ -12,16 +12,7 @@ public class Budget {
     private String Name;
     // 금액
     private int money;
-    // 금액 전체
-    private int sumMoney;
-
-    public int getSumMoney() {
-        return sumMoney;
-    }
-
-    public void setSumMoney(int sumMoney) {
-        this.sumMoney = sumMoney;
-    }
+    // 합계 금액
 
     // 기본연산자
     public Budget(){}

@@ -1,5 +1,7 @@
 package bitcamp.project1.App1.util;
 
+import bitcamp.project1.App1.vo.Budget;
+
 public class LinkedList extends AbstractList {
 
     private Node first;
@@ -100,8 +102,20 @@ public class LinkedList extends AbstractList {
             arr[i] = cursor.value;
             cursor = cursor.next;
         }
-        java.util.LinkedList l;
         return arr;
+    }
+
+    public int sumValue() {
+        int sum = 0;
+        Node current = first;
+
+        while (current != null) {
+            if (current.value instanceof Budget){
+                sum += ((Budget) current.value).getMoney();
+            }
+            current = current.next;
+        }
+        return sum;
     }
 
     // 1) 스태틱 중첩 클래스
