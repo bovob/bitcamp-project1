@@ -30,6 +30,18 @@ public class Prompt {
         }
     }
 
+    public static Date inputDateList(String format, Object... args){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+        while(true){
+            try{
+                String dateString = input(format, args);
+                return dateFormat.parse(dateString);
+            }catch (ParseException e){
+                System.out.println("날짜 형식이 올바르지 않습니다 (yyyy-mm)");
+            }
+        }
+    }
+
     public static void close() {
         keyboardScanner.close();
     }

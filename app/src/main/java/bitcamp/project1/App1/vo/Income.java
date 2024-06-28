@@ -16,17 +16,16 @@ public class Income {
     private int money;
     // 날짜
     private Date date;
+    // 특정 년/월 조회
+    private Date dateList;
 
     // 기본연산자
     public Income(){}
-
-
 
     // 수입번호 받을 연산자
     public Income(int no){
         this.no = no;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -82,9 +81,18 @@ public class Income {
     }
 
     public void setDate(Date date) {
-
         this.date = date;
     }
+
+    public String getDateList() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+        return dateFormat.format(this.dateList);
+    }
+
+    public void setDateList(Date dateList) {
+        this.dateList = dateList;
+    }
+
 
     // 인덱스 추가
     public static int getNextSeqNo() {
