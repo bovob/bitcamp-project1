@@ -12,16 +12,6 @@ public class Fixedcost {
     private String Name;
     // 금액
     private int money;
-    // 금액 전체
-    private int sumMoney;
-
-    public int getSumMoney() {
-        return sumMoney;
-    }
-
-    public void setSumMoney(int sumMoney) {
-        this.sumMoney = sumMoney;
-    }
 
     // 기본연산자
     public Fixedcost(){}

@@ -34,9 +34,10 @@ public class FixedcostCommand {
         Fixedcost fixedcost = new Fixedcost();
         fixedcost.setName(Prompt.input("예산이름?"));
         fixedcost.setMoney(Prompt.inputInt("금액?"));
-        System.out.println("총 합계?");
         fixedcost.setNo(Fixedcost.getNextSeqNo());
         fixedcostList.add(fixedcost);
+        System.out.printf("총 합계? %d\n", fixedcostList.sumValue());
+
     }
 
     private void viewFixedcost() {
@@ -49,15 +50,14 @@ public class FixedcostCommand {
         System.out.printf("예산번호: %d\n", fixedcostNo);
         System.out.printf("예산명: %s\n", fixedcost.getName());
         System.out.printf("금액: %s\n", fixedcost.getMoney());
-        System.out.printf("총 금액: %s\n", "현재 총 금액을 보여줄 예정입니다.");
+        System.out.printf("총 금액: %d\n", fixedcostList.sumValue());
     }
 
     private void listFixedcost() {
         System.out.println("예산번호 이름 금액 합계");
         for (Object obj : fixedcostList.toArray()) {
             Fixedcost fixedcost = (Fixedcost) obj;
-            // 마지막 합계 %s -> %d로 바꿔야함
-            System.out.printf("%d %s %d %s\n", fixedcost.getNo(), fixedcost.getName(), fixedcost.getMoney(),"합계나올자리");
+            System.out.printf("%d %s %d %d\n", fixedcost.getNo(), fixedcost.getName(), fixedcost.getMoney(),fixedcostList.sumValue());
         }
     }
 
@@ -71,7 +71,7 @@ public class FixedcostCommand {
 
         fixedcost.setName(Prompt.input("예산이름(현재 : %s)?", fixedcost.getName()));
         fixedcost.setMoney(Prompt.inputInt("예산(현재 : %d)?", fixedcost.getMoney()));
-        System.out.println("총 예산이 나올자리 입니다.");
+        System.out.printf("총 합계? %d\n", fixedcostList.sumValue());
         System.out.println("변경 했습니다.");
     }
 

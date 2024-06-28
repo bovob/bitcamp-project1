@@ -1,6 +1,7 @@
 package bitcamp.project1.App1.util;
 
-import bitcamp.project1.App1.vo.Budget;
+import bitcamp.project1.App1.vo.Income;
+import bitcamp.project1.App1.vo.Fixedcost;
 
 public class LinkedList extends AbstractList {
 
@@ -110,9 +111,12 @@ public class LinkedList extends AbstractList {
         Node current = first;
 
         while (current != null) {
-            if (current.value instanceof Budget){
-                sum += ((Budget) current.value).getMoney();
+            if (current.value instanceof Income){
+                sum += ((Income) current.value).getMoney();
+            } else if (current.value instanceof Fixedcost) {
+                sum += ((Fixedcost) current.value).getMoney();
             }
+
             current = current.next;
         }
         return sum;

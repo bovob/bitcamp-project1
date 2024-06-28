@@ -2,23 +2,22 @@ package bitcamp.project1.App1.vo;
 
 import java.util.Objects;
 
-public class Budget {
+public class Income {
 
     // 인덱스
     private static int seqNo;
     // 번호
     private int no;
-    // 예산 이름
+    // 수입 이름
     private String Name;
     // 금액
     private int money;
-    // 합계 금액
 
     // 기본연산자
-    public Budget(){}
+    public Income(){}
 
-    // 예산번호 받을 연산자
-    public Budget(int no){
+    // 수입번호 받을 연산자
+    public Income(int no){
         this.no = no;
     }
 
@@ -30,8 +29,8 @@ public class Budget {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Budget budget = (Budget) o;
-        return no == budget.no;
+        Income income = (Income) o;
+        return no == income.no;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class Budget {
     }
 
     public static void setSeqNo(int seqNo) {
-        Budget.seqNo = seqNo;
+        Income.seqNo = seqNo;
     }
 
     public int getNo() {

@@ -1,14 +1,12 @@
 package bitcamp.project1.App1;
 
-import bitcamp.project1.App1.command.BudgetCommand;
+import bitcamp.project1.App1.command.IncomeCommand;
 import bitcamp.project1.App1.command.FixedcostCommand;
 import bitcamp.project1.App1.util.Prompt;
-import bitcamp.project1.App1.vo.Budget;
-import bitcamp.project1.App1.vo.Fixedcost;
 
 public class App {
 
-    static String[] mainMenus = new String[] { "예산", "지출", "월 결산", "고정비", "목표","종료" };
+    static String[] mainMenus = new String[] { "수입", "지출", "월 결산", "고정비", "목표","종료" };
     static String[][] subMenus = {
         { "등록", "목록", "조회", "변경", "삭제" },
         { "등록", "목록", "조회", "변경", "삭제" },
@@ -17,7 +15,7 @@ public class App {
         { "등록", "목록", "조회", "변경", "삭제" }
     };
 
-    BudgetCommand budgetCommand = new BudgetCommand();
+    IncomeCommand incomeCommand = new IncomeCommand();
     FixedcostCommand fixedcostCommand = new FixedcostCommand();
 
     public static void main(String[] args) {
@@ -101,9 +99,9 @@ public class App {
                     System.out.println("유효한 메뉴 번호가 아닙니다.");
                 } else {
                     switch (menuTitle) {
-                        case "예산":
-                            System.out.println("예산");
-                            budgetCommand.executeBudgetCommand(subMenuTitle);
+                        case "수입":
+                            System.out.println("수입");
+                            incomeCommand.executeBudgetCommand(subMenuTitle);
                             break;
                         case "지출":
                             System.out.println("지출");
