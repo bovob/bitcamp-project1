@@ -1,4 +1,4 @@
-package bitcamp.project1.App1.vo;
+package bitcamp.project1.App2.vo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Income {
   // 수입 이름
   private String Name;
   // 금액
-  private int money;
+  private int amount;
   // 날짜
   private Date date;
   // 특정 년/월 조회
@@ -74,12 +74,12 @@ public class Income {
     this.Name = name;
   }
 
-  public int getMoney() {
-    return money;
+  public int getAmount() {
+    return amount;
   }
 
-  public void setMoney(int money) {
-    this.money = money;
+  public void setAmount(int amount) {
+    this.amount = amount;
   }
 
   public Date getDate() {

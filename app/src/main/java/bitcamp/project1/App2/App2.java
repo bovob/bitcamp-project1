@@ -3,6 +3,7 @@
  */
 package bitcamp.project1.App2;
 
+import bitcamp.project1.App2.command.IncomeCommand;
 import bitcamp.project1.App2.command.OutcomeCommand;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Css;
@@ -17,6 +18,7 @@ public class App2 {
 
   //  IncomeCommand uCommand = new UserCommand();
   OutcomeCommand outcomeCommand = new OutcomeCommand();
+  IncomeCommand incomeCommand = new IncomeCommand();
   //  BoardCommand noticeCommand = new BoardCommand();
   //  ProjectCommand projectCommand = new ProjectCommand(userCommand.getUserList());
 
@@ -84,7 +86,7 @@ public class App2 {
         } else {
           switch (menuTitle) {
             case "수입":
-              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
+              incomeCommand.executeBudgetCommand(subMenuTitle);
               break;
             case "지출":
               outcomeCommand.executeOutcomeCommand(subMenuTitle);

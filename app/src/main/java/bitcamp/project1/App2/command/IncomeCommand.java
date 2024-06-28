@@ -1,13 +1,12 @@
-package bitcamp.project1.App1.command;
+package bitcamp.project1.App2.command;
 
-import bitcamp.project1.App1.util.LinkedList;
-import bitcamp.project1.App1.util.Prompt;
-import bitcamp.project1.App1.vo.Income;
-
+import bitcamp.project1.App2.util.Prompt;
+import bitcamp.project1.App2.vo.Income;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class IncomeCommand {
 
@@ -40,7 +39,7 @@ public class IncomeCommand {
     Income income = new Income();
     income.setDate(Prompt.inputDate("날짜? (yyyy-mm-dd)"));
     income.setName(Prompt.input("수입 명?"));
-    income.setMoney(Prompt.inputInt("금액?"));
+    income.setAmount(Prompt.inputInt("금액?"));
     income.setNo(Income.getNextSeqNo());
     incomeList.add(income);
   }
@@ -56,8 +55,8 @@ public class IncomeCommand {
     System.out.printf("날짜: %s\n", income.getDate());
     System.out.printf("수입번호: %d\n", incomeNo);
     System.out.printf("수입명: %s\n", income.getName());
-    System.out.printf("금액: %s\n", income.getMoney());
-    System.out.printf("총 금액: %d\n", incomeList.sumValue());
+    System.out.printf("금액: %s\n", income.getAmount());
+    System.out.printf("총 금액: %d\n", sumValue());
   }
 
   // 수입 목록
@@ -94,8 +93,8 @@ public class IncomeCommand {
     for (Object obj : incomes) {
       Income income = (Income) obj;
       System.out.printf("%d %s %s %d\n", income.getNo(), income.getDate(), income.getName(),
-          income.getMoney());
-      sum += income.getMoney();
+          income.getAmount());
+      sum += income.getAmount();
     }
     System.out.printf("총 합계: %d\n", sum);
   }
@@ -134,7 +133,7 @@ public class IncomeCommand {
         public int compare(Object o1, Object o2) {
           Income income1 = (Income) o1;
           Income income2 = (Income) o2;
-          return Integer.compare(income2.getMoney(), income1.getMoney());
+          return Integer.compare(income2.getAmount(), income1.getAmount());
         }
       });
 
@@ -154,8 +153,8 @@ public class IncomeCommand {
     }
     income.setDate(Prompt.inputDate("날짜(현재 : %s)", income.getDate()));
     income.setName(Prompt.input("수입명(현재 : %s)?", income.getName()));
-    income.setMoney(Prompt.inputInt("가격(현재 : %d)?", income.getMoney()));
-    System.out.printf("총 합계? %d\n", incomeList.sumValue());
+    income.setAmount(Prompt.inputInt("가격(현재 : %d)?", income.getAmount()));
+    System.out.printf("총 합계? %d\n", sumValue());
     System.out.println("변경 했습니다.");
   }
 
@@ -172,4 +171,16 @@ public class IncomeCommand {
     }
 
   }
+
+  // 전체 수입
+  private int sumValue() {
+      int sum = 0;
+      for (Object obj : incomeList) {
+          Income income = (Income) obj;
+          sum += income.getAmount();
+      }
+      return sum;
+  }
+
+
 }
