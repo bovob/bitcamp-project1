@@ -18,13 +18,16 @@ public class Prompt {
   }
 
   public static Date inputDate(String format, Object... args) {
-    //    return Date date = Date.parse(dateStr, formatter)
-    //    String dateStr = input(format, args);
     while (true) {
       try {
-        return Date.valueOf(input(format, args));
+        String input = input(format, args);
+        if (input.matches("\\d{4}-\\d{2}")) {
+          return Date.valueOf(input + "-01");
+        } else {
+          return Date.valueOf(input);
+        }
       } catch (IllegalArgumentException e) {
-        System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM-dd 형식으로 입력해주세요.");
+        System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM 혹은 yyyy-MM-dd 형식으로 입력해주세요.");
       }
     }
 

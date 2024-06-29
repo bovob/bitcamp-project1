@@ -43,18 +43,18 @@ public class OutcomeCommand {
   //    System.out.printf("조회수: %d\n", board.getViewCount());
   //  }
   //
-  private void updateOutcome() {
-    int outcomNo = Prompt.inputInt("게시글 번호?");
-    Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
-    if (outcome == null) {
-      System.out.println("없는 게시글 입니다.");
-      return;
-    }
-    outcome.setView();
-    outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
-    outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
-    System.out.println("변경됨");
-  }
+  //  private void updateOutcome() {
+  //    int outcomNo = Prompt.inputInt("게시글 번호?");
+  //    Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
+  //    if (outcome == null) {
+  //      System.out.println("없는 게시글 입니다.");
+  //      return;
+  //    }
+  //    outcome.setView();
+  //    outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
+  //    outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
+  //    System.out.println("변경됨");
+  //  }
 
   //  private void deleteOutcome() {
   //    int boardNo = Prompt.inputInt("프로젝트 번호?");

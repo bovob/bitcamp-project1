@@ -7,7 +7,7 @@ import bitcamp.project1.App2.command.OutcomeCommand;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Css;
 
-public class App2 {
+public class                                                                                                                                                App2 {
   private static String appTitle = "[가계부]";
   Css css = new Css();
   String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월 결산", "종료"};
