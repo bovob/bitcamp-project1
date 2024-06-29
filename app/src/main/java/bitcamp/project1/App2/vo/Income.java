@@ -11,7 +11,7 @@ public class Income {
   // 번호
   private int no;
   // 수입 이름
-  private String Name;
+  private String memo;
   // 금액
   private int amount;
   // 날짜
@@ -66,12 +66,12 @@ public class Income {
     this.no = no;
   }
 
-  public String getName() {
-    return Name;
+  public String getMemo() {
+    return memo;
   }
 
-  public void setName(String name) {
-    this.Name = name;
+  public void setMemo(String memo) {
+    this.memo = memo;
   }
 
   public int getAmount() {

@@ -1,8 +1,10 @@
 package bitcamp.project1.App2.util;
 
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class Prompt {
@@ -19,31 +21,52 @@ public class Prompt {
     return Integer.parseInt(input(format, args));
   }
 
+//  받은거
+//  public static java.util.Date inputDate(String format, Object... args) {
+//    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");
+//    while (true) {
+//      try {
+//        String input = input(format, args); // 입력받은 yyyy-MM에 "-01"을 추가하여 yyyy-MM-dd 형식으로 만듭니다.
+//        return formatDate.parse(input + "-01");
+//      } catch (ParseException e) {
+//        System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM 형식으로 입력해주세요.");
+//      }
+//    }
+//  }
+
   public static java.util.Date inputDate(String format, Object... args) {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+    formatDate.setLenient(false); // 날짜 형식을 엄격하게 검사
+
     while (true) {
       try {
-        String input = input(format, args); // 입력받은 yyyy-MM에 "-01"을 추가하여 yyyy-MM-dd 형식으로 만듭니다.
-        java.util.Date date = sdf.parse(input + "-01");
-        return date;
+        String input = input(format, args);
+        return formatDate.parse(input);
+      } catch (ParseException e) {
+        System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM-dd 형식으로 입력해주세요.");
+      }
+    }
+  }
+
+  // inputDate 메서드 수정 - yyyy-mm으로만 받을 조회용도
+  public static java.util.Date inputDateMonth(String format, Object... args) {
+    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM");
+    formatDate.setLenient(false); // 날짜 형식을 엄격하게 검사
+
+    while (true) {
+      try {
+        String input = input(format, args);
+        Date date = formatDate.parse(input);
+        // yyyy-MM 형식으로 입력받은 후, 해당 월의 1일로 설정
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        return cal.getTime();
       } catch (ParseException e) {
         System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM 형식으로 입력해주세요.");
       }
     }
   }
-
-  // 기존 작성 해두신거
-  //public static Date inputDate(String format, Object... args) {
-  //  //    return Date date = Date.parse(dateStr, formatter)
-  //  //    String dateStr = input(format, args);
-  //  while (true) {
-  //    try {
-  //      return Date.valueOf(input(format, args));
-  //    } catch (IllegalArgumentException e) {
-  //      System.out.println("날짜 형식이 잘못되었습니다. yyyy-MM-dd 형식으로 입력해주세요.");
-  //    }
-  //  }
-  //}
 
   public static void close() {
     keyboardScanner.close();

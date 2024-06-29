@@ -10,7 +10,7 @@ import java.util.LinkedList;
 
 public class IncomeCommand {
 
-  LinkedList incomeList = new LinkedList();
+  LinkedList<Income> incomeList = new LinkedList<>();
 
   // 수입 메뉴목록
   public void executeBudgetCommand(String command) {
@@ -19,9 +19,9 @@ public class IncomeCommand {
       case "등록":
         this.addIncome();
         break;
-      case "조회":
-        this.viewIncome();
-        break;
+//      case "조회":
+//        this.viewIncome();
+//        break;
       case "목록":
         this.listIncome();
         break;
@@ -38,26 +38,26 @@ public class IncomeCommand {
   private void addIncome() {
     Income income = new Income();
     income.setDate(Prompt.inputDate("날짜? (yyyy-mm-dd)"));
-    income.setName(Prompt.input("수입 명?"));
+    income.setMemo(Prompt.input("수입 명?"));
     income.setAmount(Prompt.inputInt("금액?"));
     income.setNo(Income.getNextSeqNo());
     incomeList.add(income);
   }
 
-  // 수입 조회 (인덱스)
-  private void viewIncome() {
-    int incomeNo = Prompt.inputInt("예산번호?");
-    Income income = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
-    if (income == null) {
-      System.out.println("없는 수입번호입니다.");
-      return;
-    }
-    System.out.printf("날짜: %s\n", income.getDate());
-    System.out.printf("수입번호: %d\n", incomeNo);
-    System.out.printf("수입명: %s\n", income.getName());
-    System.out.printf("금액: %s\n", income.getAmount());
-    System.out.printf("총 금액: %d\n", sumValue());
-  }
+//  // 수입 조회 (인덱스)
+//  private void viewIncome() {
+//    int incomeNo = Prompt.inputInt("예산번호?");
+//    Income income = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
+//    if (income == null) {
+//      System.out.println("없는 수입번호입니다.");
+//      return;
+//    }
+//    System.out.printf("날짜: %s\n", income.getDate());
+//    System.out.printf("수입번호: %d\n", incomeNo);
+//    System.out.printf("수입명: %s\n", income.getName());
+//    System.out.printf("금액: %s\n", income.getAmount());
+//    System.out.printf("총 금액: %d\n", sumValue());
+//  }
 
   // 수입 목록
   private void listIncome() {
@@ -68,7 +68,7 @@ public class IncomeCommand {
       incomes = incomeList.toArray();
       printIncomes(incomes);
     } else if (command.equalsIgnoreCase("N")) {
-      Date dateInput = Prompt.inputDate("날짜? (yyyy-MM)");
+      Date dateInput = Prompt.inputDateMonth("날짜? (yyyy-MM)");
       incomes = getIncomesByMonth(dateInput);
       printIncomes(incomes);
     } else {
@@ -92,7 +92,7 @@ public class IncomeCommand {
     int sum = 0;
     for (Object obj : incomes) {
       Income income = (Income) obj;
-      System.out.printf("%d %s %s %d\n", income.getNo(), income.getDate(), income.getName(),
+      System.out.printf("%d %s %s %d\n", income.getNo(), income.getDate(), income.getMemo(),
           income.getAmount());
       sum += income.getAmount();
     }
@@ -146,13 +146,13 @@ public class IncomeCommand {
   // 수입 변경
   private void updateIncome() {
     int incomeNo = Prompt.inputInt("수입번호?");
-    Income income = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
+    Income income = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
     if (income == null) {
       System.out.println("없는 번호입니다.");
       return;
     }
     income.setDate(Prompt.inputDate("날짜(현재 : %s)", income.getDate()));
-    income.setName(Prompt.input("수입명(현재 : %s)?", income.getName()));
+    income.setMemo(Prompt.input("수입명(현재 : %s)?", income.getMemo()));
     income.setAmount(Prompt.inputInt("가격(현재 : %d)?", income.getAmount()));
     System.out.printf("총 합계? %d\n", sumValue());
     System.out.println("변경 했습니다.");
@@ -161,11 +161,11 @@ public class IncomeCommand {
   // 수입 삭제
   private void deleteIncome() {
     int incomeNo = Prompt.inputInt("수입번호?");
-    Income deletedIncome = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
+    Income deletedIncome = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
 
     if (deletedIncome != null) {
-      incomeList.remove(incomeList.indexOf(deletedIncome));
-      System.out.printf("'%s'을 삭제 했습니다.\n", deletedIncome.getName());
+      incomeList.remove(deletedIncome);
+      System.out.printf("'%s'을 삭제 했습니다.\n", deletedIncome.getMemo());
     } else {
       System.out.println("없는 수입번호 입니다.");
     }
@@ -175,9 +175,8 @@ public class IncomeCommand {
   // 전체 수입
   private int sumValue() {
       int sum = 0;
-      for (Object obj : incomeList) {
-          Income income = (Income) obj;
-          sum += income.getAmount();
+      for (Income value : incomeList) {
+          sum += value.getAmount();
       }
       return sum;
   }
