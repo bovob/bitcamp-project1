@@ -4,6 +4,7 @@ import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Outcome;
 
 import java.util.LinkedList;
+import java.sql.Date;
 
 public class OutcomeCommand {
 
@@ -43,18 +44,18 @@ public class OutcomeCommand {
   //    System.out.printf("조회수: %d\n", board.getViewCount());
   //  }
   //
-  //  private void updateOutcome() {
-  //    int outcomNo = Prompt.inputInt("게시글 번호?");
-  //    Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
-  //    if (outcome == null) {
-  //      System.out.println("없는 게시글 입니다.");
-  //      return;
-  //    }
-  //    outcome.setView();
-  //    outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
-  //    outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
-  //    System.out.println("변경됨");
+  //private void updateOutcome() {
+  //  int outcomNo = Prompt.inputInt("게시글 번호?");
+  //  Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
+  //  if (outcome == null) {
+  //    System.out.println("없는 게시글 입니다.");
+  //    return;
   //  }
+  //  outcome.setView();
+  //  outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
+  //  outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
+  //  System.out.println("변경됨");
+  //}
 
   //  private void deleteOutcome() {
   //    int boardNo = Prompt.inputInt("프로젝트 번호?");
@@ -71,7 +72,7 @@ public class OutcomeCommand {
     Outcome outcome = new Outcome();
     outcome.setNo(Outcome.getSeqNo());
     outcome.setAmount(Prompt.inputInt("쓴 돈: "));
-    outcome.setDate(Prompt.inputDate("날짜 (yyyy-MM-dd): "));
+    //outcome.setDate(Prompt.inputDate("날짜 (yyyy-MM-dd): "));
     outcome.setMemo(Prompt.input("메모:"));
     outcomeList.add(outcome);
     System.out.println("등록했습니다.");
