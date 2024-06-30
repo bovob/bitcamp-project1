@@ -22,7 +22,9 @@ public class App2 {
   OutcomeCommand outcomeCommand = new OutcomeCommand();
   GoalCommand goalCommand = new GoalCommand();
   //  BoardCommand noticeCommand = new BoardCommand();
-  MonthlyCommand monthlyCommand = new MonthlyCommand();
+  
+  // 출금 작성 이후 추가해야함
+  MonthlyCommand monthlyCommand = new MonthlyCommand(incomeCommand);
 
 
   public static void main(String[] args) {

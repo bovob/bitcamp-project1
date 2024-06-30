@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class IncomeCommand {
 
-  LinkedList incomeList = new LinkedList();
+  LinkedList<Income> incomeList = new LinkedList<>();
 
   // 수입 메뉴목록
   public void executeIncomeCommand(String command) {
@@ -20,9 +20,6 @@ public class IncomeCommand {
       case "등록":
         this.addIncome();
         break;
-//      case "조회":
-//        this.viewIncome();
-//        break;
       case "목록":
         this.listIncome();
         break;
@@ -44,21 +41,6 @@ public class IncomeCommand {
     income.setNo(Income.getNextSeqNo());
     incomeList.add(income);
   }
-
-  // 수입 조회 (인덱스)
-//  private void viewIncome() {
-//    int incomeNo = Prompt.inputInt("예산번호?");
-//    Income income = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
-//    if (income == null) {
-//      System.out.println("없는 수입번호입니다.");
-//      return;
-//    }
-//    System.out.printf("날짜: %s\n", income.getDate());
-//    System.out.printf("수입번호: %d\n", incomeNo);
-//    System.out.printf("수입명: %s\n", income.getMemo());
-//    System.out.printf("금액: %s\n", income.getAmount());
-//    System.out.printf("총 금액: %d\n", incomeList.sumValue());
-//  }
 
   // 수입 목록
   private void listIncome() {
@@ -147,7 +129,7 @@ public class IncomeCommand {
   // 수입 변경
   private void updateIncome() {
     int incomeNo = Prompt.inputInt("수입번호?");
-    Income income = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
+    Income income = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
     if (income == null) {
       System.out.println("없는 번호입니다.");
       return;
@@ -161,7 +143,7 @@ public class IncomeCommand {
   // 수입 삭제
   private void deleteIncome() {
     int incomeNo = Prompt.inputInt("수입번호?");
-    Income deletedIncome = (Income) incomeList.get(incomeList.indexOf(new Income(incomeNo)));
+    Income deletedIncome = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
 
     if (deletedIncome != null) {
       incomeList.remove(deletedIncome);
@@ -170,5 +152,10 @@ public class IncomeCommand {
       System.out.println("없는 수입번호 입니다.");
     }
 
+  }
+
+
+  public LinkedList<Income> getIncomeList() {
+    return this.incomeList;
   }
 }
