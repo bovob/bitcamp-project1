@@ -2,7 +2,6 @@ package bitcamp.project1.App2.command;
 
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Goal;
-import bitcamp.project1.App2.vo.Income;
 import java.util.LinkedList;
 
 public class GoalCommand {
@@ -31,7 +30,7 @@ public class GoalCommand {
     // 목표 등록
     private void addGoal() {
         Goal goal = new Goal();
-        goal.setDate(Prompt.inputDateMonth("날짜? (yyyy-mm)"));
+        goal.setDate(Prompt.inputDate("날짜? (yyyy-mm)"));
         goal.setMemo(Prompt.input("목표 명?"));
         goal.setAmount(Prompt.inputInt("예산금액?"));
         goal.setNo(Goal.getNextSeqNo());
@@ -70,7 +69,7 @@ public class GoalCommand {
             System.out.println("없는 번호입니다.");
             return;
         }
-        goal.setDate(Prompt.inputDateMonth("날짜(%s)? ", goal.getDate()));
+        goal.setDate(Prompt.inputDate("날짜(%s)? ", goal.getDate()));
         goal.setMemo(Prompt.input("목표명(%s)? ", goal.getMemo()));
         goal.setAmount(Prompt.inputInt("예산(%d)? ", goal.getAmount()));
     }
@@ -92,9 +91,9 @@ public class GoalCommand {
     public int calRemain(int goalNo) {
         Goal goal = findGoalByNo(goalNo);
         if (goal == null) {
-            return 0; // 또는 예외를 던질 수 있습니다.
+            return -1;
         }
-        int outcome = 100; // 실제 지출 계산 로직으로 대체해야 합니다.
+        int outcome = 100; // 실제 지출 계산 로직으로 변경
         return goal.getAmount() - outcome;
     }
 

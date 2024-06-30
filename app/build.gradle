@@ -34,8 +34,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'bitcamp.project1.App2.App'
-//    mainClass = 'bitcamp.project1.App1.App'
+    mainClass = 'bitcamp.project1.App2.App2'
 }
 
 tasks.named('test') {

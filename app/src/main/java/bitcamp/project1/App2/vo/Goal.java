@@ -16,13 +16,6 @@ public class Goal {
         this.no = no;
     }
 
-//    public Goal(int no, String memo, Date date, int amount){
-//        this.no = no;
-//        this.memo = memo;
-//        this.date = date;
-//        this.amount =amount;
-//    }
-
     public static int getSeqNo() {
         return seqNo;
     }

@@ -6,23 +6,24 @@ package bitcamp.project1.App2;
 import bitcamp.project1.App2.command.GoalCommand;
 import bitcamp.project1.App2.command.IncomeCommand;
 import bitcamp.project1.App2.command.OutcomeCommand;
+import bitcamp.project1.App2.command.MonthlyCommand;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Css;
 
 public class App2 {
   private static final String appTitle = "[가계부]";
   Css css = new Css();
-  String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월 결산", "종료"};
+  String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월결산", "종료"};
   String[][] subMenus =
       {{"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제","이전"},
           {"등록", "목록", "조회", "변경", "삭제", "이전"}, {}};
 
-  //  IncomeCommand uCommand = new UserCommand();
-  OutcomeCommand outcomeCommand = new OutcomeCommand();
   IncomeCommand incomeCommand = new IncomeCommand();
+  OutcomeCommand outcomeCommand = new OutcomeCommand();
   GoalCommand goalCommand = new GoalCommand();
   //  BoardCommand noticeCommand = new BoardCommand();
-  //  ProjectCommand projectCommand = new ProjectCommand(userCommand.getUserList());
+  MonthlyCommand monthlyCommand = new MonthlyCommand();
+
 
   public static void main(String[] args) {
     new App2().execute();
@@ -49,7 +50,7 @@ public class App2 {
     css.lineSimple();
     System.out.printf("[%s]", menuTitle);
     System.out.println();
-    for (int i = 0; i < menus.length - 1; i++) {
+    for (int i = 0; i < menus.length -1 ; i++) {
       System.out.printf("%d. %s\n", (i + 1), menus[i]);
     }
     System.out.printf("9. %s\n", menus[menus.length - 1]);
@@ -66,8 +67,9 @@ public class App2 {
   }
 
   void processMenu(String menuTitle, String[] menus) {
-    if (menuTitle.equals("월 결산")) {
-      System.out.println("월 결산입니다.");
+
+    if (menuTitle.equals("월결산")){
+      monthlyCommand.executeMonthlyCommand();
       return;
     }
     printSubmenu(menuTitle, menus);
@@ -88,7 +90,7 @@ public class App2 {
         } else {
           switch (menuTitle) {
             case "수입":
-              incomeCommand.executeBudgetCommand(subMenuTitle);
+              incomeCommand.executeIncomeCommand(subMenuTitle);
               break;
             case "지출":
               outcomeCommand.executeOutcomeCommand(subMenuTitle);
