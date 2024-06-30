@@ -1,10 +1,12 @@
 package bitcamp.project1.App2.command;
 
+import bitcamp.project1.App2.util.OutcomeComparator;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Outcome;
 
-import java.util.LinkedList;
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.LinkedList;
 
 public class OutcomeCommand {
 
@@ -17,63 +19,79 @@ public class OutcomeCommand {
         this.addOutcome();
         break;
       case "목록":
-        this.listOutcome();
+        this.viewOutcome();
         break;
       case "변경":
-        System.out.println("준비중");
-        //        this.updateOutcome();
+        this.updateOutcome();
         break;
       case "삭제":
-        System.out.println("준비중");
-        //        this.deleteOutcome();
+        this.deleteOutcome();
         break;
     }
   }
 
-  //  private void viewOutcome() {
-  //    int boardNo = Prompt.inputInt("게시글 번호?");
-  //    Outcome board = (Outcome) boardList.get(boardList.indexOf(new Outcome(boardNo)));
-  //    if (board == null) {
-  //      System.out.println("없는 게시글 입니다.");
-  //      return;
-  //    }
-  //    board.setView();
-  //    System.out.printf("제목: %s\n", board.getTitle());
-  //    System.out.printf("내용: %s\n", board.getContent());
-  //    System.out.printf("작성일: %tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS\n", board.getCreateDate());
-  //    System.out.printf("조회수: %d\n", board.getViewCount());
-  //  }
-  //
-  //private void updateOutcome() {
-  //  int outcomNo = Prompt.inputInt("게시글 번호?");
-  //  Outcome outcome = outcomeList.get(outcomeList.indexOf(new Outcome(outcomNo)));
-  //  if (outcome == null) {
-  //    System.out.println("없는 게시글 입니다.");
-  //    return;
-  //  }
-  //  outcome.setView();
-  //  outcome.setTitle((Prompt.input("프로젝트명(%s): \n", outcome.getTitle())));
-  //  outcome.setContent((Prompt.input("설명(%s): \n", outcome.getContent())));
-  //  System.out.println("변경됨");
-  //}
+  private void viewOutcome() {
+    String command = Prompt.input("전체를 검색하시겠습니까?(Y/N)");
+    if (command.equalsIgnoreCase("Y")) {
+      OutcomeComparator.sortOutcomes(outcomeList, Prompt.inputInt("정렬 방식을 선택하세요 1: 금액순 2: 날짜순"));
+      listOutcome();
+    } else if (command.equalsIgnoreCase("N")) {
+      Date dateInput = Prompt.inputDate("날짜? (yyyy-MM)");
+      listOutcomesByMonth(dateInput);
+    } else {
+      System.out.println("잘못된 입력입니다.");
+      return;
+    }
+    int outcomNo = Prompt.inputInt("상세 조회할 항목을 선택해주세요: ");
+    int index = outcomeList.indexOf(new Outcome(outcomNo));
+    if (index != -1) {
+      Outcome outcome = outcomeList.get(index);
+      System.out.printf("날짜 : %tY-%<tm-%<td\n", outcome.getDate());
+      System.out.printf("금액 : %d\n", outcome.getAmount());
+      System.out.printf("메모 : %s\n", outcome.getMemo());
+    } else {
+      System.out.println("존재하지 않는 항목입니다.");
+    }
+  }
 
-  //  private void deleteOutcome() {
-  //    int boardNo = Prompt.inputInt("프로젝트 번호?");
-  //    Outcome deletedBoard = (Outcome) boardList.get(boardList.indexOf(new Outcome(boardNo)));
-  //    if (deletedBoard != null) {
-  //      boardList.remove(boardList.indexOf(deletedBoard));
-  //      System.out.printf("%s 삭제됨\n", deletedBoard.getTitle());
-  //    } else {
-  //      System.out.println("없는 게시글입니다.");
-  //    }
-  //  }
+  private void updateOutcome() {
+    OutcomeComparator.sortOutcomes(outcomeList, 0);
+    listOutcome();
+    int outcomNo = Prompt.inputInt("수정하실 항목을 선택해주세요 : ");
+    int index = outcomeList.indexOf(new Outcome(outcomNo));
+    if (index != -1) {
+      Outcome outcome = outcomeList.get(index);
+      outcome.setDate((Prompt.inputDate("날짜 (%tY-%<tm-%<td): \n", outcome.getDate())));
+      outcome.setAmount((Prompt.inputInt("금액 (%d): \n", outcome.getAmount())));
+      outcome.setMemo((Prompt.input("메모 (%s): \n", outcome.getMemo())));
+      System.out.println("변경됨");
+    } else {
+      System.out.println("존재하지 않는 항목입니다.");
+    }
+
+  }
+
+  private void deleteOutcome() {
+    OutcomeComparator.sortOutcomes(outcomeList, 0);
+    listOutcome();
+    int outcomeNo = Prompt.inputInt("삭제하실 항목을 선택해주세요 : ");
+    int index = outcomeList.indexOf(new Outcome(outcomeNo));
+    if (index != -1) {
+      Outcome deletedOutcome = outcomeList.get(index);
+      outcomeList.remove(index);
+      System.out.printf("%tY-%<tm-%<td %d원 삭제했습니다.\n", deletedOutcome.getDate(),
+          deletedOutcome.getAmount());
+    } else {
+      System.out.println("존재하지 않는 항목입니다.");
+    }
+  }
 
   private void addOutcome() {
     Outcome outcome = new Outcome();
     outcome.setNo(Outcome.getSeqNo());
-    outcome.setAmount(Prompt.inputInt("쓴 돈: "));
-    //outcome.setDate(Prompt.inputDate("날짜 (yyyy-MM-dd): "));
-    outcome.setMemo(Prompt.input("메모:"));
+    outcome.setAmount(Prompt.inputInt("금액 : "));
+    outcome.setDate(Prompt.inputDate("날짜 : "));
+    outcome.setMemo(Prompt.input("메모 :"));
     outcomeList.add(outcome);
     System.out.println("등록했습니다.");
   }
@@ -82,11 +100,27 @@ public class OutcomeCommand {
     System.out.println("번호 날짜 금액");
     for (Object obj : outcomeList.toArray()) {
       Outcome outcome = (Outcome) obj;
-      System.out.printf("%d %tB/%td일 -%d원\n", outcome.getNo(), outcome.getDate(), outcome.getDate(),
+      System.out.printf("%d %tY-%<tm-%<td %d원\n", outcome.getNo(), outcome.getDate(),
           outcome.getAmount());
     }
   }
 
+  private void listOutcomesByMonth(Date dateInput) {
+    System.out.println("번호 날짜 금액");
+    for (Outcome outcome : outcomeList) {
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(outcome.getDate());
+      Calendar inputCal = Calendar.getInstance();
+      inputCal.setTime(dateInput);
+      if (cal.get(Calendar.YEAR) == inputCal.get(Calendar.YEAR) && cal.get(
+          Calendar.MONTH) == inputCal.get(Calendar.MONTH)) {
+        System.out.printf("%d %tY-%<tm-%<td %d원\n", outcome.getNo(), outcome.getDate(),
+            outcome.getAmount());
+      }
+    }
+  }
 
-
+  public LinkedList<Outcome> getOutcomeList() {
+    return outcomeList;
+  }
 }

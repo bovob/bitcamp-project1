@@ -5,8 +5,8 @@ package bitcamp.project1.App2;
 
 import bitcamp.project1.App2.command.GoalCommand;
 import bitcamp.project1.App2.command.IncomeCommand;
-import bitcamp.project1.App2.command.OutcomeCommand;
 import bitcamp.project1.App2.command.MonthlyCommand;
+import bitcamp.project1.App2.command.OutcomeCommand;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Css;
 
@@ -14,18 +14,15 @@ public class App2 {
   private static final String appTitle = "[가계부]";
   Css css = new Css();
   String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월결산", "종료"};
-  String[][] subMenus =
-      {{"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제","이전"},
-          {"등록", "목록", "조회", "변경", "삭제", "이전"}, {}};
+  String[][] subMenus = {{"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"},
+      {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "조회", "변경", "삭제", "이전"}, {}};
 
   IncomeCommand incomeCommand = new IncomeCommand();
   OutcomeCommand outcomeCommand = new OutcomeCommand();
-  GoalCommand goalCommand = new GoalCommand();
-  //  BoardCommand noticeCommand = new BoardCommand();
-  
-  // 출금 작성 이후 추가해야함
-  MonthlyCommand monthlyCommand = new MonthlyCommand(incomeCommand);
-
+  OutcomeCommand fixedOutcomeCommand = new OutcomeCommand();
+  GoalCommand goalCommand = new GoalCommand(outcomeCommand, fixedOutcomeCommand);
+  MonthlyCommand monthlyCommand =
+      new MonthlyCommand(incomeCommand, outcomeCommand, fixedOutcomeCommand);
 
   public static void main(String[] args) {
     new App2().execute();
@@ -52,7 +49,7 @@ public class App2 {
     css.lineSimple();
     System.out.printf("[%s]", menuTitle);
     System.out.println();
-    for (int i = 0; i < menus.length -1 ; i++) {
+    for (int i = 0; i < menus.length - 1; i++) {
       System.out.printf("%d. %s\n", (i + 1), menus[i]);
     }
     System.out.printf("9. %s\n", menus[menus.length - 1]);
@@ -70,7 +67,7 @@ public class App2 {
 
   void processMenu(String menuTitle, String[] menus) {
 
-    if (menuTitle.equals("월결산")){
+    if (menuTitle.equals("월결산")) {
       monthlyCommand.executeMonthlyCommand();
       return;
     }
@@ -101,7 +98,7 @@ public class App2 {
               goalCommand.executeGoalcomeCommand(subMenuTitle);
               break;
             case "고정비":
-              System.out.printf("여기는 앞으로 %s\n", subMenuTitle);
+              fixedOutcomeCommand.executeOutcomeCommand(subMenuTitle);
               break;
             default:
               System.out.printf("%s 메뉴의 명령을 처리할 수 없습니다.\n", menuTitle);
@@ -114,6 +111,7 @@ public class App2 {
   }
 
   void execute() {
+    css.titlePrintCrap();
     String command;
     printmenu();
     while (true) {

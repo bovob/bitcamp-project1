@@ -1,6 +1,7 @@
 package bitcamp.project1.App2.vo;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class Outcome {
   private static int seqNo;
@@ -12,6 +13,10 @@ public class Outcome {
   public Outcome() {
   }
 
+  public Outcome(int no) {
+    this.no = no;
+  }
+
   public Outcome(int no, String memo, Date date, int amount) {
     this.no = no;
     this.memo = memo;
@@ -21,6 +26,21 @@ public class Outcome {
 
   public static int getSeqNo() {
     return ++seqNo;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Outcome outcome = (Outcome) o;
+    return no == outcome.no;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(no);
   }
 
   public int getAmount() {
