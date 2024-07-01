@@ -55,7 +55,7 @@ public class GoalCommand {
       return;
     }
 
-    System.out.println("목표번호 날짜    목표명   예산   현재지출    남은금액 | 성공여부");
+    System.out.println("목표번호 날짜    목표명   예산   현재지출    남은금액 | 달성여부");
     for (Goal obj : goalList) {
       Goal goal = obj;              //%d 바꿔야함
       System.out.printf("%8d %tY-%<tm %s  %6d %8d %8d   | %b\n", goal.getNo(), // 번호
@@ -63,7 +63,7 @@ public class GoalCommand {
           goal.getMemo(), //목표명
           goal.getAmount(), //예산
           calExpense(goal.getNo()), calRemain(goal.getNo()), // 남은금액
-          isSuccess(calRemain(goal.getNo())) // 성공여부
+          goalSuccess(isSuccess(calRemain(goal.getNo()))) // 달성여부
       );
 
     }
@@ -151,7 +151,7 @@ public class GoalCommand {
   }
 
   public String goalSuccess(boolean b){
-    return b ? " 성공" : " 실패";
+    return b ? "O" : "X";
   }
 
   //    public boolean isSuccess(int goalNo){
