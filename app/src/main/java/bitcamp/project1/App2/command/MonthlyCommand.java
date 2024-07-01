@@ -1,5 +1,6 @@
 package bitcamp.project1.App2.command;
 
+import bitcamp.project1.App2.util.OpenaiAPI;
 import bitcamp.project1.App2.util.Prompt;
 import bitcamp.project1.App2.vo.Css;
 import bitcamp.project1.App2.vo.Income;
@@ -11,14 +12,11 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class MonthlyCommand {
-  // 수입 목록 가져오기
   private final IncomeCommand incomeCommand;
   private final OutcomeCommand outcomeCommand;
   private final OutcomeCommand fixedOutcomeCommand;
   Css css = new Css();
 
-
-  // 출금 작성 이후 추가해야함
   public MonthlyCommand(IncomeCommand incomeCommand, OutcomeCommand outcomeCommand,
       OutcomeCommand fixedOutcomeCommand) {
     this.incomeCommand = incomeCommand;
@@ -43,20 +41,19 @@ public class MonthlyCommand {
       printWeek(cal, day, maxDay);
     }
 
-    // 월 합계 출력
-    System.out.printf("* 총 합계 : "+ css.yellowAnsi + "%d" + css.resetAnsi +"\n\n", getMonthlyResult(date));
+    System.out.printf("* 총 합계 : %d \n\n", getMonthlyResult(date));
+    OpenaiAPI openaiAPI = new OpenaiAPI();
+    openaiAPI.sendRequest(getDailyIncome(date), getDailyOutcome(date));
+    openaiAPI.printAssistantReply();
 
   }
 
-  // 주 단위 출력
   private void printWeek(Calendar cal, int startDay, int maxDay) {
-    // 날짜 출력
     for (int i = 0; i < 7 && (startDay + i) <= maxDay; i++) {
-      System.out.printf("%-15s", (startDay + i) + "일");
+      System.out.printf("%-14s", (startDay + i) + "일");
     }
     System.out.println();
 
-    // 수입 출력
     for (int i = 0; i < 7 && (startDay + i) <= maxDay; i++) {
       cal.set(Calendar.DAY_OF_MONTH, startDay + i);
       Date currentDate = cal.getTime();
@@ -65,7 +62,6 @@ public class MonthlyCommand {
     }
     System.out.println();
 
-    // 출금 출력
     for (int i = 0; i < 7 && (startDay + i) <= maxDay; i++) {
       cal.set(Calendar.DAY_OF_MONTH, startDay + i);
       Date currentDate = cal.getTime();
@@ -74,24 +70,20 @@ public class MonthlyCommand {
     }
     System.out.println();
 
-    // 합계 출력
     for (int i = 0; i < 7 && (startDay + i) <= maxDay; i++) {
       cal.set(Calendar.DAY_OF_MONTH, startDay + i);
       Date currentDate = cal.getTime();
       int dailyTotal = 0;
-      // 일 수입 받아오기
       int dailyIncomeTotal = getDailyIncome(currentDate);
 
-      // 일 출금 받아오기 넣어야함
       int dailyOutcomeTotal = getDailyOutcome(currentDate);
       dailyTotal = dailyIncomeTotal - dailyOutcomeTotal;
-      System.out.printf("합계:" + css.blueAnsi + "%8d" + css.resetAnsi + "원|", dailyTotal);
+      System.out.printf("합계:%8d원|", dailyTotal);
     }
     System.out.println("\n");
 
   }
 
-  // 입금 출력
   private int getDailyIncome(Date date) {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String dateString = sdf.format(date);
@@ -108,7 +100,6 @@ public class MonthlyCommand {
     return total;
   }
 
-  // 출금 출력
   private int getDailyOutcome(Date date) {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String dateString = sdf.format(date);
@@ -122,18 +113,15 @@ public class MonthlyCommand {
         total += outcome.getAmount();
       }
     }
-
     for (Object obj : fixedOutcomeList.toArray()) {
       Outcome outcome = (Outcome) obj;
       if (sdf.format(outcome.getDate()).equals(dateString)) {
         total += outcome.getAmount();
       }
     }
-
     return total;
   }
 
-  // 월 합계 출력
   private int getMonthlyResult(Date date) {
     Calendar cal = Calendar.getInstance();
     cal.setTime(date);

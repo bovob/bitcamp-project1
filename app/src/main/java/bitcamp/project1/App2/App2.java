@@ -15,7 +15,7 @@ public class App2 {
   Css css = new Css();
   String[] mainMenus = new String[] {"수입", "지출", "목표", "고정비", "월결산", "종료"};
   String[][] subMenus = {{"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"},
-      {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "조회", "변경", "삭제", "이전"}, {}};
+      {"등록", "목록", "변경", "삭제", "이전"}, {"등록", "목록", "변경", "삭제", "이전"}, {}};
 
   IncomeCommand incomeCommand = new IncomeCommand();
   OutcomeCommand outcomeCommand = new OutcomeCommand();
@@ -81,7 +81,6 @@ public class App2 {
         }
         int menuNo = Integer.parseInt(command);
         if (menuNo == 9) {
-          printmenu();
           break;
         }
         String subMenuTitle = getMenuTitle(menuNo, menus);

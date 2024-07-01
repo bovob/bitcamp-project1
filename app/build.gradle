@@ -20,8 +20,8 @@ dependencies {
     testImplementation libs.junit.jupiter
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 
     // This dependency is used by the application.
     implementation libs.guava
