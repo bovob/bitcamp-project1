@@ -81,6 +81,7 @@ public class App2 {
         }
         int menuNo = Integer.parseInt(command);
         if (menuNo == 9) {
+          printmenu();
           break;
         }
         String subMenuTitle = getMenuTitle(menuNo, menus);

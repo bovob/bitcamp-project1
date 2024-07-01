@@ -44,7 +44,7 @@ public class MonthlyCommand {
     }
 
     // 월 합계 출력
-    System.out.printf("* 총 합계 : %d \n\n", getMonthlyResult(date));
+    System.out.printf("* 총 합계 : "+ css.yellowAnsi + "%d" + css.resetAnsi +"\n\n", getMonthlyResult(date));
 
   }
 
@@ -52,7 +52,7 @@ public class MonthlyCommand {
   private void printWeek(Calendar cal, int startDay, int maxDay) {
     // 날짜 출력
     for (int i = 0; i < 7 && (startDay + i) <= maxDay; i++) {
-      System.out.printf("%-14s", (startDay + i) + "일");
+      System.out.printf("%-15s", (startDay + i) + "일");
     }
     System.out.println();
 
@@ -85,7 +85,7 @@ public class MonthlyCommand {
       // 일 출금 받아오기 넣어야함
       int dailyOutcomeTotal = getDailyOutcome(currentDate);
       dailyTotal = dailyIncomeTotal - dailyOutcomeTotal;
-      System.out.printf("합계:%8d원|", dailyTotal);
+      System.out.printf("합계:" + css.blueAnsi + "%8d" + css.resetAnsi + "원|", dailyTotal);
     }
     System.out.println("\n");
 
