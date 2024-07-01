@@ -64,7 +64,7 @@ public class OutcomeCommand {
       outcome.setDate((Prompt.inputDate("날짜 (%tY-%<tm-%<td): \n", outcome.getDate())));
       outcome.setAmount((Prompt.inputInt("금액 (%d): \n", outcome.getAmount())));
       outcome.setMemo((Prompt.input("메모 (%s): \n", outcome.getMemo())));
-      System.out.println("변경됨");
+      System.out.println("변경되었습니다.");
     } else {
       System.out.println("존재하지 않는 항목입니다.");
     }

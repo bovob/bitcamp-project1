@@ -40,9 +40,9 @@ public class GoalCommand {
   // 목표 등록
   private void addGoal() {
     Goal goal = new Goal();
-    goal.setDate(Prompt.inputDate("날짜? (yyyy-mm)"));
-    goal.setMemo(Prompt.input("목표 명?"));
-    goal.setAmount(Prompt.inputInt("예산금액?"));
+    goal.setMemo(Prompt.input("목표 : "));
+    goal.setDate(Prompt.inputDate("목표 월 입력(yyyy-mm) : "));
+    goal.setAmount(Prompt.inputInt("예산금액 : "));
     goal.setNo(Goal.getNextSeqNo());
     goalList.add(goal);
   }
@@ -55,10 +55,10 @@ public class GoalCommand {
       return;
     }
 
-    System.out.println("목표번호 날짜 목표명 예산 현재지출 남은금액 | 성공여부");
+    System.out.println("목표번호 날짜    목표명   예산   현재지출    남은금액 | 성공여부");
     for (Goal obj : goalList) {
       Goal goal = obj;              //%d 바꿔야함
-      System.out.printf("%d %s %s %d %d %d | %b\n", goal.getNo(), // 번호
+      System.out.printf("%8d %tY-%<tm %s  %6d %8d %8d   | %b\n", goal.getNo(), // 번호
           goal.getDate(), // 날짜
           goal.getMemo(), //목표명
           goal.getAmount(), //예산
@@ -71,15 +71,15 @@ public class GoalCommand {
 
   // 목표 변경
   private void updateGoal() {
-    int goalNo = Prompt.inputInt("목표 번호? ");
+    int goalNo = Prompt.inputInt("변경하실 항목을 선택해주세요 : ");
     Goal goal = findGoalByNo(goalNo);
     if (goal == null) {
       System.out.println("없는 번호입니다.");
       return;
     }
-    goal.setDate(Prompt.inputDate("날짜(%s)? ", goal.getDate()));
-    goal.setMemo(Prompt.input("목표명(%s)? ", goal.getMemo()));
-    goal.setAmount(Prompt.inputInt("예산(%d)? ", goal.getAmount()));
+    goal.setDate(Prompt.inputDate("날짜(%s) : ", goal.getDate()));
+    goal.setMemo(Prompt.input("목표(%s) : ", goal.getMemo()));
+    goal.setAmount(Prompt.inputInt("예산금액(%d) : ", goal.getAmount()));
   }
 
   // 목표 삭제
@@ -91,7 +91,7 @@ public class GoalCommand {
       goalList.remove(deletedGoal);
       System.out.printf("'%s'을 삭제 했습니다.\n", deletedGoal.getMemo());
     } else {
-      System.out.println("없는 목표번호 입니다.");
+      System.out.println("존재하지 않는 항목 입니다.");
     }
   }
 
@@ -148,6 +148,10 @@ public class GoalCommand {
 
   public boolean isSuccess(int remainAmount) {
     return remainAmount >= 0;
+  }
+
+  public String goalSuccess(boolean b){
+    return b ? " 성공" : " 실패";
   }
 
   //    public boolean isSuccess(int goalNo){

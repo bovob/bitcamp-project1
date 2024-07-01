@@ -35,11 +35,12 @@ public class IncomeCommand {
   // 수입 등록
   private void addIncome() {
     Income income = new Income();
-    income.setDate(Prompt.inputDate("날짜? (yyyy-mm-dd)"));
-    income.setMemo(Prompt.input("수입 명?"));
-    income.setAmount(Prompt.inputInt("금액?"));
+    income.setAmount(Prompt.inputInt("금액? "));
+    income.setDate(Prompt.inputDate("날짜? "));
+    income.setMemo(Prompt.input("메모?"));
     income.setNo(Income.getNextSeqNo());
     incomeList.add(income);
+    System.out.println("등록했습니다.");
   }
 
   // 수입 목록
@@ -128,21 +129,21 @@ public class IncomeCommand {
 
   // 수입 변경
   private void updateIncome() {
-    int incomeNo = Prompt.inputInt("수입번호?");
+    int incomeNo = Prompt.inputInt("수정하실 항목을 선택해주세요 : ");
     Income income = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
     if (income == null) {
-      System.out.println("없는 번호입니다.");
+      System.out.println("존재하지 않는 항목입니다.");
       return;
     }
-    income.setDate(Prompt.inputDate("날짜(현재 : %s)", income.getDate()));
-    income.setMemo(Prompt.input("수입명(현재 : %s)?", income.getMemo()));
-    income.setAmount(Prompt.inputInt("가격(현재 : %d)?", income.getAmount()));
-    System.out.println("변경 했습니다.");
+    income.setDate(Prompt.inputDate("날짜 (%tY-%<tm-%<td)", income.getDate()));
+    income.setAmount(Prompt.inputInt("금액(%d)?", income.getAmount()));
+    income.setMemo(Prompt.input("메모 (%s)? ", income.getMemo()));
+    System.out.println("변경되었습니다.");
   }
 
   // 수입 삭제
   private void deleteIncome() {
-    int incomeNo = Prompt.inputInt("수입번호?");
+    int incomeNo = Prompt.inputInt("삭제하실 항목을 선택해주세요 : ");
     Income deletedIncome = incomeList.get(incomeList.indexOf(new Income(incomeNo)));
 
     if (deletedIncome != null) {
