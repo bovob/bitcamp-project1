@@ -55,10 +55,10 @@ public class GoalCommand {
       return;
     }
 
-    System.out.println("목표번호 날짜    목표명   예산   현재지출    남은금액 | 달성여부");
+    System.out.printf("%s %5s %-6s %-2s %-4s %-4s |  %s\n","목표번호","날짜", "목표명", "예산", "현재지출", "남은금액", "달성여부");
     for (Goal obj : goalList) {
-      Goal goal = obj;              //%d 바꿔야함
-      System.out.printf("%8d %tY-%<tm %s  %6d %8d %8d   | %b\n", goal.getNo(), // 번호
+      Goal goal = obj;
+      System.out.printf("%8d %tY-%<tm %-6s  %8d %-6d %-6d  |  %s\n", goal.getNo(), // 번호
           goal.getDate(), // 날짜
           goal.getMemo(), //목표명
           goal.getAmount(), //예산
@@ -77,7 +77,7 @@ public class GoalCommand {
       System.out.println("없는 번호입니다.");
       return;
     }
-    goal.setDate(Prompt.inputDate("날짜(%s) : ", goal.getDate()));
+    goal.setDate(Prompt.inputDate("날짜(%tY-%<tm) : ", goal.getDate()));
     goal.setMemo(Prompt.input("목표(%s) : ", goal.getMemo()));
     goal.setAmount(Prompt.inputInt("예산금액(%d) : ", goal.getAmount()));
   }
