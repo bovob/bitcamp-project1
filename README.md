@@ -85,26 +85,31 @@
 ### 1. 수입
 - 수입을 CRUD를 통하여 입력할 수 있다.
 - 수입 변경/삭제 시 no를 이용한다.
- 
+ ![Income](https://github.com/user-attachments/assets/f9348201-bb9f-4fb8-8cdb-9256d98d8905)
+
 
 ### 2. 지출
 - 지출을 CRUD를 통하여 입력할 수 있다.
 - 지출 변경/삭제 시 no를 이용한다.
- 
+ ![Outcome](https://github.com/user-attachments/assets/4e1b7e32-30d6-41f7-bec9-65b9583d761e)
+
 
 ### 3. 목표
 - 특정 월을 기준으로 예산을 설정한다.
 - 해당 월의 예산-지출을 통하여 성공여부를 판단한다.
- 
+ ![Goal](https://github.com/user-attachments/assets/2802337b-68e3-4a36-ac95-fd01c8e0df23)
+
 
 ### 4. 고정비
 - 특정 날짜/월을 기준으로 고정적인 지출을 설정한다.
 - 월 결산에 특정 날짜/월(1일)에 지출로 설정된다.
- 
+ ![FixOutcome](https://github.com/user-attachments/assets/46649c5a-af8d-4c10-a6c8-e14f55ebd888)
+
 
 ### 5. 월결산
 - 특정한 달을 입력하면 해당한 달의 수입/지출/총합을 출력한다.
 - OpenAI 의 답변을 출력해준다.
+![Monthly](https://github.com/user-attachments/assets/43007cad-8cc5-4246-8468-2c2be66be753)
 
 
 
